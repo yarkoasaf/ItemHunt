@@ -1,0 +1,2 @@
+# Aletazin 8000
+give @s iron_hoe[enchantments={levels:{"minecraft:knockback":10}},max_stack_size=1,damage=0,max_damage=60,custom_name='{"color":"aqua","text":"Aletazin 8000"}',lore=['{"bold":false,"color":"gray","italic":false,"obfuscated":false,"strikethrough":false,"text":"[Item Hunt] (17/33) Premio diario.","underlined":false}','{"bold":false,"color":"blue","italic":false,"obfuscated":false,"strikethrough":false,"text":"Empuja más que los porotos","underlined":false}']] 1

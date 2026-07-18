@@ -1,0 +1,2 @@
+#Metal ligero
+give @s copper_ingot[custom_name='{"color":"aqua","text":"Metal ligero"}',lore=['{"bold":false,"color":"gray","italic":false,"obfuscated":false,"strikethrough":false,"text":"[Item Hunt] (13/33) Premio diario.","underlined":false}','{"bold":false,"color":"blue","italic":false,"obfuscated":false,"strikethrough":false,"text":"Clavent","underlined":false}'],enchantment_glint_override=true,attribute_modifiers=[{id:"gravity",type:"generic.gravity",amount:-0.065,operation:"add_value"}]] 1

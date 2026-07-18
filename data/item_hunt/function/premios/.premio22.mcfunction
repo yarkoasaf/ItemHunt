@@ -1,0 +1,2 @@
+# el viejo de los sacos
+give @s zombie_spawn_egg[entity_data={id:"minecraft:zombie",CustomName:'{"color":"aqua","text":"el viejo de los sacos"}',CustomNameVisible:1b,PersistenceRequired:1b,Health:2f,attributes:[{id:"minecraft:max_health",base:2}],DeathLootTable:"item_hunt:el_viejo_de_los_sacos"},custom_name='{"color":"aqua","text":"El Viejo de los Sacos"}',lore=['{"bold":false,"color":"gray","italic":false,"text":"[Item Hunt] (22/33) Premio diario."}','{"bold":false,"color":"blue","italic":false,"text":"Mátalo y suelta 10 sacos"}'],enchantment_glint_override=true] 1

@@ -1,0 +1,2 @@
+# Decoy
+give @s creeper_spawn_egg[custom_name='{"color":"aqua","text":"Decoy"}',lore=['{"bold":false,"color":"gray","italic":false,"obfuscated":false,"strikethrough":false,"text":"[Item Hunt] (15/33) Premio diario.","underlined":false}','{"bold":false,"color":"blue","italic":false,"obfuscated":false,"strikethrough":false,"text":"La mejor mecánica de Battle Royale","underlined":false}'],enchantment_glint_override=true,entity_data={id:"minecraft:creeper",ExplosionRadius:0b,CustomNameVisible:0b,CustomName:"Decoy"}] 15

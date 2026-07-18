@@ -1,0 +1,2 @@
+# Aletatron 80000
+give @s diamond_hoe[enchantments={levels:{"minecraft:knockback":30}},max_stack_size=1,damage=0,max_damage=30,lore=['{"bold":false,"color":"gray","italic":false,"obfuscated":false,"strikethrough":false,"text":"[Item Hunt] (18/33) Premio diario.","underlined":false}','{"bold":false,"color":"blue","italic":false,"obfuscated":false,"strikethrough":false,"text":"Empuja más que Aletazin 8000","underlined":false}'],custom_name='{"color":"aqua","text":"Aletatron 80000"}'] 1
