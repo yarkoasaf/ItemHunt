@@ -1,0 +1,12 @@
+execute if score tab item_hunt_config matches 1 run scoreboard objectives setdisplay list item_hunt_rankeds
+execute unless score tab item_hunt_config matches 1 run scoreboard objectives setdisplay list
+execute unless score teams item_hunt_config matches 1 run team empty item_hunt_daily_winners
+execute unless score teams item_hunt_config matches 1 run team empty item_hunt_daily_winners_first
+execute unless score teams item_hunt_config matches 1 run team empty item_hunt_top_winner
+execute unless score teams item_hunt_config matches 1 run team empty item_hunt_top_winner_daily
+execute unless score teams item_hunt_config matches 1 run team empty item_hunt_top_winner_daily_first
+
+# Update the sidebar mode indicators
+function item_hunt:board_flags
+
+execute if score endereye item_hunt_config matches 1 run tellraw @s [{"text":"[Item Hunt] ","color":"aqua"},{"text":"Bloqueo de fabricacion de ojos de ender: haz /reload para aplicar.","color":"yellow"}]

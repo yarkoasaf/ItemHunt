@@ -1,0 +1,1 @@
+$execute as @s run function item_hunt:premios/.premio$(random_premio)

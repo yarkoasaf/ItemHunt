@@ -1,0 +1,1 @@
+$scoreboard players $(operation) $(hora):$(minuto) item_hunt_board 10
