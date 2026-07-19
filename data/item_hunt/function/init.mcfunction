@@ -41,6 +41,8 @@ execute unless score tab item_hunt_config matches -2147483648.. run scoreboard p
 execute unless score consume item_hunt_config matches -2147483648.. run scoreboard players set consume item_hunt_config 0
 execute unless score race item_hunt_config matches -2147483648.. run scoreboard players set race item_hunt_config 0
 execute unless score topbuff item_hunt_config matches -2147483648.. run scoreboard players set topbuff item_hunt_config 0
+# dimension: item pool by dimension. 1=Overworld, 2=+Nether, 3=+End. Default Overworld.
+execute unless score dimension item_hunt_config matches -2147483648.. run scoreboard players set dimension item_hunt_config 1
 
 # Inicializar storage para el reloj
 data modify storage item_hunt:clock time set value {}
@@ -57,7 +59,9 @@ function item_hunt:setup_items
 
 #seed the first day's items immediately so the game is playable from load
 #(sin esto no habria items hasta el primer reset a las 24h)
-function item_hunt:random {min:1,max:1228}
+#el rango depende de la dimension elegida (Overworld/Nether/End)
+function item_hunt:config/resolve_range
+function item_hunt:random with storage item_hunt:cfg args
 function item_hunt:resolve_items
 
 #fija el numero de items del primer dia

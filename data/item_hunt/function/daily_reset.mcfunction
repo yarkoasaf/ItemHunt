@@ -1,9 +1,10 @@
 tellraw @a [{"text":"[Item Hunt] ","color":"aqua"},{"text":"Reiniciando items del día...","color":"yellow"}]
 playsound minecraft:block.note_block.pling player @a ~ ~ ~ 1 1.5
 #incia random con min y max
-#almacena el valor en target_int en storage item_hunt:data
-#(1.21.1) la tabla tiene 1228 items tras quitar los agregados desde 1.21.2
-function item_hunt:random {min:1,max:1228}
+#el rango depende de la dimension elegida (Overworld/Nether/End)
+#la tabla esta ordenada Overworld -> Nether -> End; resolve_range fija el max
+function item_hunt:config/resolve_range
+function item_hunt:random with storage item_hunt:cfg args
 
 #resuelve los numeros a items cacheados en storage item_hunt:data (slot1..slot7)
 function item_hunt:resolve_items

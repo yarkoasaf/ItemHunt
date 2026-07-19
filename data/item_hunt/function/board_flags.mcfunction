@@ -11,7 +11,7 @@ execute if score consume item_hunt_config matches 1 run scoreboard players set i
 execute if score consume item_hunt_config matches 1 run scoreboard players display name item_hunt_consume_line item_hunt_board {"text":"Items se consumen","color":"gold"}
 execute unless score consume item_hunt_config matches 1 run scoreboard players reset item_hunt_consume_line item_hunt_board
 
-# Ender Eyes addon indicator (detected via ITEM_HUNT_ADDONS)
-execute if score ender_eye_ok ITEM_HUNT_ADDONS matches 1 run scoreboard players set item_hunt_ender_addon item_hunt_board 102
-execute if score ender_eye_ok ITEM_HUNT_ADDONS matches 1 run scoreboard players display name item_hunt_ender_addon item_hunt_board {"text":"ender addon","color":"light_purple"}
-execute unless score ender_eye_ok ITEM_HUNT_ADDONS matches 1 run scoreboard players reset item_hunt_ender_addon item_hunt_board
+# Portals addon indicator (detected via ITEM_HUNT_ADDONS)
+execute if score portals_ok ITEM_HUNT_ADDONS matches 1 run scoreboard players set item_hunt_portals_addon item_hunt_board 102
+execute if score portals_ok ITEM_HUNT_ADDONS matches 1 run scoreboard players display name item_hunt_portals_addon item_hunt_board {"text":"portals addon","color":"light_purple"}
+execute unless score portals_ok ITEM_HUNT_ADDONS matches 1 run scoreboard players reset item_hunt_portals_addon item_hunt_board

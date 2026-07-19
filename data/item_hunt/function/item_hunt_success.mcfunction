@@ -1,17 +1,23 @@
 scoreboard players operation @s item_hunt_daily_success = $base item_hunt_daily_success
 scoreboard players add $base item_hunt_daily_success 1
 
+#compute the reward points now (2*active - 1) so the messages can show it
+scoreboard players operation reward item_hunt_config = active item_hunt_config
+scoreboard players operation reward item_hunt_config += active item_hunt_config
+scoreboard players remove reward item_hunt_config 1
+
 #message to all players that @s was the first to find all items
-execute if score @s item_hunt_daily_success matches 1 run tellraw @a [{"text":"[Item Hunt] ","color":"aqua"},{"text":"¡","color":"gold"},{"selector":"@s"},{"text":" Ha encontrado todos los items del día antes que todos!","color":"gold"}]
+execute if score @s item_hunt_daily_success matches 1 run tellraw @a ["",{"text":"[Item Hunt] ","color":"aqua"},{"text":"¡","color":"gold"},{"selector":"@s","color":"gold"},{"text":" Ha encontrado los ","color":"gold"},{"score":{"name":"active","objective":"item_hunt_config"},"color":"yellow","bold":true},{"text":" items antes que todos!","color":"gold"},{"text":" (+","color":"green"},{"score":{"name":"reward","objective":"item_hunt_config"},"color":"green","bold":true},{"text":" puntos)","color":"green"}]
 #message to all players that @s has found all items
-execute if score @s item_hunt_daily_success matches 2.. run tellraw @a [{"text":"[Item Hunt] ","color":"aqua"},{"text":"¡","color":"gold"},{"selector":"@s"},{"text":" Ha encontrado todos los items del día!","color":"gold"}]
+execute if score @s item_hunt_daily_success matches 2.. run tellraw @a ["",{"text":"[Item Hunt] ","color":"aqua"},{"text":"¡","color":"gold"},{"selector":"@s","color":"gold"},{"text":" Ha encontrado los ","color":"gold"},{"score":{"name":"active","objective":"item_hunt_config"},"color":"yellow","bold":true},{"text":" items del día!","color":"gold"},{"text":" (+","color":"green"},{"score":{"name":"reward","objective":"item_hunt_config"},"color":"green","bold":true},{"text":" puntos)","color":"green"}]
 
 execute as @a run playsound minecraft:entity.player.levelup master @s ^ ^ ^ 1 0.6
 execute as @s run playsound minecraft:entity.cat.ambient master @s ^ ^ ^ 1 1.7
 
 
-#give scoreboard reward points
-scoreboard players add @s item_hunt_rankeds 1
+#give scoreboard reward points; scales with the number of items in the list.
+#points = 2*active - 1  ->  1 item=1, 2=3, 3=5, 4=7, 5=9, 6=11, 7=13
+scoreboard players operation @s item_hunt_rankeds += reward item_hunt_config
 
 #give random reward (25)
 function item_hunt:premios/elegir

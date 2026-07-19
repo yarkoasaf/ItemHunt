@@ -8,5 +8,3 @@ execute unless score teams item_hunt_config matches 1 run team empty item_hunt_t
 
 # Update the sidebar mode indicators
 function item_hunt:board_flags
-
-execute if score endereye item_hunt_config matches 1 run tellraw @s [{"text":"[Item Hunt] ","color":"aqua"},{"text":"Bloqueo de fabricacion de ojos de ender: haz /reload para aplicar.","color":"yellow"}]
