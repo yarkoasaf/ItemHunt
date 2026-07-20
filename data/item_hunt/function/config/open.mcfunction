@@ -1,6 +1,7 @@
 # Item Hunt config menu (clickable chat). Replaces the 1.21.6 dialog (not available in 1.21.1).
 # Must be run by an operator. Buttons re-run this function to redraw with the new state.
 
+tellraw @s [""]
 tellraw @s ["",{"text":"== ","color":"aqua"},{"text":"Configuracion Item Hunt","color":"aqua","bold":true},{"text":" ==","color":"aqua"}]
 tellraw @s [""]
 # Items por dia (1-7)

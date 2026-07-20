@@ -6,4 +6,4 @@
 # [Guardar y reiniciar ahora] to apply immediately. Redraws the menu.
 $scoreboard players set dimension item_hunt_config $(dim)
 function item_hunt:config/refresh
-function item_hunt:config/open
+execute if entity @s run function item_hunt:config/open
