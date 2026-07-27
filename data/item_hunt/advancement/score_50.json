@@ -1,0 +1,44 @@
+{
+    "parent": "item_hunt:score_40",
+    "display": {
+        "icon": {
+            "id": "minecraft:diamond_shovel"
+        },
+        "title": {
+            "text": "Hunt them all!"
+        },
+        "description": {
+            "text": "Reach score 50 in Item Hunt"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "score_50": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "item_hunt_rankeds": {
+                                "min": 50
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "score_50"
+        ]
+    ],
+    "rewards": {
+        "experience": 1600
+    }
+}

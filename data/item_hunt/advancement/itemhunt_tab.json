@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "id": "minecraft:spyglass"
+        },
+        "title": {
+            "text": "Item Hunt Datapack"
+        },
+        "description": {
+            "text": "Start your adventure into Item Hunting! Complete the list of items and get rewards!"
+        },
+        "background": "minecraft:textures/block/gold_block.png",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "init": {
+            "trigger": "minecraft:tick"
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "parent": "item_hunt:itemhunt_tab",
+    "display": {
+        "icon": {
+            "id": "minecraft:feather"
+        },
+        "title": {
+            "text": "Sharp Shooter... or Hunter, Hunter of Items"
+        },
+        "description": {
+            "text": "Be the first to reach score in the loop"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {
+        "score_first": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "item_hunt_daily_success": 1
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "score_first"
+        ]
+    ],
+    "rewards": {
+        "experience": 500
+    }
+}

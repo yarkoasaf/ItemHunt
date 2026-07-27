@@ -1,0 +1,44 @@
+{
+    "parent": "item_hunt:score_10",
+    "display": {
+        "icon": {
+            "id": "minecraft:stone_shovel"
+        },
+        "title": {
+            "text": "Item Collector"
+        },
+        "description": {
+            "text": "Reach score 20 in Item Hunt"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "score_20": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "item_hunt_rankeds": {
+                                "min": 20
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "score_20"
+        ]
+    ],
+    "rewards": {
+        "experience": 700
+    }
+}
