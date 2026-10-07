@@ -5,7 +5,7 @@
 # particles and decays on its own within a few seconds when turned off or when rank is lost.
 #
 # To change the buff itself, edit the 'effect give' line at the bottom
-# (effect id / seconds / amplifier). Currently: Strength I.
+# (effect id / seconds / amplifier). Currently: Haste I + Regeneration I.
 
 # Rebuild the target set from scratch each run.
 tag @a remove buff_target

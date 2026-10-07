@@ -1,7 +1,7 @@
 scoreboard players operation @s item_hunt_daily_success = $base item_hunt_daily_success
 scoreboard players add $base item_hunt_daily_success 1
 
-#compute the reward points now (2*active - 1) so the messages can show it
+#compute the reward points now so the messages can show it
 scoreboard players operation reward item_hunt_config = active item_hunt_config
 #scoreboard players operation reward item_hunt_config += active item_hunt_config
 #scoreboard players remove reward item_hunt_config 1
@@ -16,24 +16,21 @@ execute as @s run playsound minecraft:entity.cat.ambient master @s ^ ^ ^ 1 1.7
 
 
 #give scoreboard reward points; scales with the number of items in the list.
-#points = 2*active - 1  ->  1 item=1, 2=3, 3=5, 4=7, 5=9, 6=11, 7=13
+#points = 1 per item in the list
 scoreboard players operation @s item_hunt_rankeds += reward item_hunt_config
 
-#give random reward (25)
+#give random reward (50)
 function item_hunt:premios/elegir
 
 #busca top player
 execute as @s run function item_hunt:busca_top_player
 
-#add player to daily winners team
-#daily winners team
-execute if score teams item_hunt_config matches 1 as @a if score @s item_hunt_daily_success matches 1.. run team join item_hunt_daily_winners @s
-#daily winner team if top player
-execute if score teams item_hunt_config matches 1 as @a[tag=top_player] if score @s item_hunt_daily_success matches 1.. run team join item_hunt_top_winner_daily @s
-#daily winners first
-execute if score teams item_hunt_config matches 1 as @a if score @s item_hunt_daily_success matches 1 run team join item_hunt_daily_winners_first @s
-#daily winner first if top player
-execute if score teams item_hunt_config matches 1 as @a[tag=top_player] if score @s item_hunt_daily_success matches 1 run team join item_hunt_top_winner_daily_first @s
+#mark @s as a winner of THIS tick, for the tie check in item_hunt:race_check
+tag @s add won_this_tick
+
+#teams: no se asignan aqui. item_hunt:teams_tick los recalcula cada tick a
+#partir de daily_success y del tag buff_target, asi el icono refleja el estado
+#actual (y se quita solo al perder el top o al recargar el mundo).
 
 
 #remove 1 of each hunted item on completion, if the "consume" toggle is on
@@ -45,9 +42,10 @@ execute if score consume item_hunt_config matches 1 if score active item_hunt_co
 execute if score consume item_hunt_config matches 1 if score active item_hunt_config matches 6.. run function item_hunt:config/consume_item with storage item_hunt:data slot6
 execute if score consume item_hunt_config matches 1 if score active item_hunt_config matches 7.. run function item_hunt:config/consume_item with storage item_hunt:data slot7
 
-#modo carreras: si el primer jugador completa la lista, reinicia la ronda (el timer se reinicia tambien)
-execute if score race item_hunt_config matches 1 if score @s item_hunt_daily_success matches 1 run scoreboard players operation daily_reset item_hunt_timer = ticks item_hunt_config
-execute if score race item_hunt_config matches 1 if score @s item_hunt_daily_success matches 1 run function item_hunt:daily_reset
+#modo carreras: solo marca la ronda para reiniciarla. El reinicio real lo hace
+#item_hunt:race_check una vez que score_handler termino su bucle "as @a".
+#Reiniciar aqui mismo le regalaba la ronda nueva al segundo jugador de un empate.
+execute if score race item_hunt_config matches 1 if score @s item_hunt_daily_success matches 1 run scoreboard players set #race_reset item_hunt_config 1
 
 #hook de completado: los addons se enganchan a este tag (ej: dar ojo de ender)
 function #item_hunt:on_complete

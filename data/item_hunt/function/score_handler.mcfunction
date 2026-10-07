@@ -2,6 +2,11 @@
 # We count how many of the active slots (1..active) the player has (each slot's
 # per-player score is 1 when held, set by scan_item), then compare to active.
 
+# Clear the per-tick winner marks. item_hunt_success re-adds them below, and
+# item_hunt:race_check reads them one step later in the tick tag to detect a
+# same-tick tie.
+tag @a remove won_this_tick
+
 # Count found items among the active slots, for players still hunting.
 execute as @a if score @s item_hunt_daily_success matches 0 run scoreboard players set @s item_hunt_found 0
 execute as @a if score @s item_hunt_daily_success matches 0 if score active item_hunt_config matches 1.. if score @s item_hunt_item1 matches 1 run scoreboard players add @s item_hunt_found 1

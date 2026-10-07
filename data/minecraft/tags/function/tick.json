@@ -2,8 +2,10 @@
     "values": [
         "item_hunt:item_tick",
         "item_hunt:score_handler",
+        "item_hunt:race_check",
         "item_hunt:timer_tick",
         "item_hunt:addon_tick",
-        "item_hunt:top_buff"
+        "item_hunt:top_buff",
+        "item_hunt:teams_tick"
     ]
 }

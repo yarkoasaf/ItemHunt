@@ -2,8 +2,17 @@
 
 #create scoreboards
 scoreboard objectives add item_hunt dummy
+# Wipe the objective instead of "set @a 0": the #load tag runs BEFORE the player
+# is in the world, so @a is empty here and that set reached nobody. Anyone who
+# had completed the list before the world was closed kept daily_success >= 1,
+# so item_tick never scanned them -- and since scan_item is what writes the item
+# lines onto the sidebar, the item list never got drawn at all (the timer still
+# ran, because timer_tick does not depend on players).
+# Removing the objective clears every stored score, offline players included;
+# item_tick then sets each player to 0 on their first tick in the world.
 scoreboard objectives add item_hunt_daily_success dummy
-scoreboard players set @a item_hunt_daily_success 0
+scoreboard objectives remove item_hunt_daily_success
+scoreboard objectives add item_hunt_daily_success dummy
 scoreboard players set $base item_hunt_daily_success 1
 
 scoreboard objectives add item_hunt_rankeds dummy
@@ -50,6 +59,13 @@ data modify storage item_hunt:clock time.prev_hora set value -1
 data modify storage item_hunt:clock time.prev_minuto set value -1
 data modify storage item_hunt:clock time.curr_hora set value 0
 data modify storage item_hunt:clock time.curr_minuto set value 0
+# Zero-padding for the sidebar clock: "0" when the value is a single digit, ""
+# otherwise. Kept in storage rather than computed in the macro because a macro
+# can only paste strings, not format them. See update_time_display.
+data modify storage item_hunt:clock time.prev_hpad set value ""
+data modify storage item_hunt:clock time.prev_pad set value ""
+data modify storage item_hunt:clock time.hpad set value ""
+data modify storage item_hunt:clock time.pad set value ""
 
 #setup daily reset function at midnight (pendiente)
 #schedule function item_hunt:daily_reset 24h append
@@ -78,27 +94,40 @@ scoreboard players set random_int item_hunt 0
 execute store result storage item_hunt:data target_int int 1 run scoreboard players get random_int item_hunt
 
 
-#initialize groups
+#initialize groups (cosmetic teams)
+# Exactly three states, assigned every tick by item_hunt:teams_tick:
+#   item_hunt_top_winner_daily   ✨name✨ ⭐  holds a top-rank buff AND finished today
+#   item_hunt_top_winner         ✨name✨     holds a top-rank buff
+#   item_hunt_daily_winners      name ⭐      finished today's list
+# ✨ follows the buff, so it only shows while "Buff a top players" is >= 1.
+#
+# Each team is REMOVED and re-added here so that (a) a world reload starts the
+# day with them empty -- a reload rolls a fresh item list, so yesterday's ⭐ has
+# to go -- and (b) edits to the prefixes/suffixes below always take effect.
+team remove item_hunt_daily_winners
 team add item_hunt_daily_winners "Item Hunt Daily Winners"
 team modify item_hunt_daily_winners suffix {"text":" ⭐","color":"gold", "bold": false}
 
+team remove item_hunt_top_winner
 team add item_hunt_top_winner "Item Hunt Top Winner"
 team modify item_hunt_top_winner prefix {"text":"✨","color":"gold", "bold": false}
 team modify item_hunt_top_winner suffix {"text":"✨","color":"gold", "bold": false}
 team modify item_hunt_top_winner color aqua
 
+team remove item_hunt_top_winner_daily
 team add item_hunt_top_winner_daily "Item Hunt Top Winner Daily"
 team modify item_hunt_top_winner_daily prefix {"text":"✨","color":"gold", "bold": false}
 team modify item_hunt_top_winner_daily suffix {"text":"✨ ⭐","color":"gold", "bold": false}
 team modify item_hunt_top_winner_daily color aqua
 
-team add item_hunt_daily_winners_first "Item Hunt Daily Winners First"
-team modify item_hunt_daily_winners_first suffix {"text":" ⭐⭐","color":"gold", "bold": false}
-
-team add item_hunt_top_winner_daily_first "Item Hunt Top Winner Daily First"
-team modify item_hunt_top_winner_daily_first prefix {"text":"✨","color":"gold", "bold": false}
-team modify item_hunt_top_winner_daily_first suffix {"text":"✨ ⭐⭐","color":"gold", "bold": false}
-team modify item_hunt_top_winner_daily_first color aqua
+# Obsolete "first to finish" teams (⭐⭐). Dropped: finishing first is already
+# announced in chat and rewarded with points, it no longer gets its own tag.
+# 'add' before 'remove' so that neither command can error: on a world that still
+# has them the add fails harmlessly, and from then on both succeed.
+team add item_hunt_daily_winners_first
+team remove item_hunt_daily_winners_first
+team add item_hunt_top_winner_daily_first
+team remove item_hunt_top_winner_daily_first
 
 #load config
 function item_hunt:config/refresh

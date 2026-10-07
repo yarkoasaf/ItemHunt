@@ -23,12 +23,10 @@ scoreboard objectives add item_hunt_daily_success dummy
 scoreboard players set $base item_hunt_daily_success 1
 scoreboard players set @a item_hunt_daily_success 0
 
-#reset daily winners team
-execute if score teams item_hunt_config matches 1 run team empty item_hunt_daily_winners
-execute if score teams item_hunt_config matches 1 run team empty item_hunt_daily_winners_first
-execute if score teams item_hunt_config matches 1 run team empty item_hunt_top_winner_daily
-execute if score teams item_hunt_config matches 1 run team empty item_hunt_top_winner_daily_first
-execute if score teams item_hunt_config matches 1 as @a[tag=top_player] run team join item_hunt_top_winner @s
+#teams: los recalcula item_hunt:teams_tick. El wipe de item_hunt_daily_success
+#de arriba deja a todos sin la estrella, y la llamada de abajo lo aplica ya
+#mismo en vez de esperar al siguiente tick.
+function item_hunt:teams_tick
 
 #add clock display
 function item_hunt:on_minute_changed
