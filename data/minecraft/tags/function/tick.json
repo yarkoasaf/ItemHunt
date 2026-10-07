@@ -6,6 +6,7 @@
         "item_hunt:timer_tick",
         "item_hunt:addon_tick",
         "item_hunt:top_buff",
-        "item_hunt:teams_tick"
+        "item_hunt:teams_tick",
+        "item_hunt:advancement_tick"
     ]
 }

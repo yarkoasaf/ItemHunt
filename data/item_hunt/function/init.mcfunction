@@ -18,6 +18,20 @@ scoreboard players set $base item_hunt_daily_success 1
 scoreboard objectives add item_hunt_rankeds dummy
 scoreboard players set $max item_hunt_rankeds -2147483648
 
+# Repeatable "+50 items" advancement, derived from item_hunt_rankeds so that
+# editing the score by hand (/scoreboard) works just like hunting the items:
+#   item_hunt_plus50      = awards still owed = max(0, rankeds/50 - 1) - paid
+#   item_hunt_plus50_paid = awards already handed out
+# The -1 keeps the first award at score 100: at 50 it would land on the same
+# tick as item_hunt:score_50 and the two toasts stepped on each other.
+# Neither is wiped on reload or daily reset: the score is cumulative, so these
+# have to be too. See item_hunt:plus50_check.
+scoreboard objectives add item_hunt_plus50 dummy
+scoreboard objectives add item_hunt_plus50_paid dummy
+# constants held as fake players (scoreboard operations need scores, not literals)
+scoreboard players set $div50 item_hunt_plus50 50
+scoreboard players set $zero item_hunt_plus50 0
+
 scoreboard objectives add item_hunt_timer dummy
 scoreboard players set daily_reset item_hunt_timer 0
 scoreboard players set const_1200 item_hunt_timer 1200
@@ -52,6 +66,8 @@ execute unless score race item_hunt_config matches -2147483648.. run scoreboard 
 execute unless score topbuff item_hunt_config matches -2147483648.. run scoreboard players set topbuff item_hunt_config 0
 # dimension: item pool by dimension. 1=Overworld, 2=+Nether, 3=+End. Default Overworld.
 execute unless score dimension item_hunt_config matches -2147483648.. run scoreboard players set dimension item_hunt_config 1
+# debug: 1 logs every "+50 items" award to chat. See item_hunt:config/debug_adv.
+execute unless score debug item_hunt_config matches -2147483648.. run scoreboard players set debug item_hunt_config 0
 
 # Inicializar storage para el reloj
 data modify storage item_hunt:clock time set value {}

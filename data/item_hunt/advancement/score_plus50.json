@@ -1,22 +1,22 @@
 {
-    "parent": "item_hunt:score_60",
+    "parent": "item_hunt:score_50",
     "display": {
         "icon": {
-            "id": "minecraft:spyglass"
+            "id": "minecraft:netherite_shovel"
         },
         "title": {
-            "text": "The Hunter of Items"
+            "text": "+50 items"
         },
         "description": {
-            "text": "Reach score 100 in Item Hunt. Congrats! Share it!"
+            "text": "gain XP each 50 items hunted"
         },
         "frame": "challenge",
         "show_toast": true,
         "announce_to_chat": true,
-        "hidden": true
+        "hidden": false
     },
     "criteria": {
-        "score_100": {
+        "score_plus50": {
             "trigger": "minecraft:tick",
             "conditions": {
                 "player": [
@@ -24,8 +24,8 @@
                         "condition": "minecraft:entity_scores",
                         "entity": "this",
                         "scores": {
-                            "item_hunt_rankeds": {
-                                "min": 100
+                            "item_hunt_plus50": {
+                                "min": 1
                             }
                         }
                     }
@@ -35,10 +35,10 @@
     },
     "requirements": [
         [
-            "score_100"
+            "score_plus50"
         ]
     ],
     "rewards": {
-        "experience": 16000
+        "experience": 1600
     }
 }
