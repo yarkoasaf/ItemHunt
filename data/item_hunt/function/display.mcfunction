@@ -22,8 +22,10 @@ scoreboard players set §7Buscar_items: item_hunt_board 97
 # Tierra
 
 
-# Show the board on the sidebar
-scoreboard objectives setdisplay sidebar item_hunt_board
+# Show the board on the sidebar -- only in global mode. Silent mode keeps it
+# hidden and shows the same information on the actionbar instead, but the board
+# itself is still kept up to date so switching back is instant.
+execute if score hud item_hunt_config matches 1 run scoreboard objectives setdisplay sidebar item_hunt_board
 
 
 #  Item Hunt
@@ -37,3 +39,8 @@ scoreboard objectives setdisplay sidebar item_hunt_board
 
 # Set the active-mode indicator lines
 function item_hunt:board_flags
+
+# Lay out the silent display's actionbar for the new list: the names are known
+# now and will not change until the next reset, so the paging is measured once
+# here rather than every tick. Harmless in global mode.
+function item_hunt:silent/measure

@@ -68,6 +68,31 @@ execute unless score topbuff item_hunt_config matches -2147483648.. run scoreboa
 execute unless score dimension item_hunt_config matches -2147483648.. run scoreboard players set dimension item_hunt_config 1
 # debug: 1 logs every "+50 items" award to chat. See item_hunt:config/debug_adv.
 execute unless score debug item_hunt_config matches -2147483648.. run scoreboard players set debug item_hunt_config 0
+# hud: display mode. 1 = global (sidebar always on screen), 0 = silent (nothing
+# on screen; crouching puts the list and the clock on the actionbar for a few
+# seconds -- see item_hunt:silent_tick and hudloops below).
+execute unless score hud item_hunt_config matches -2147483648.. run scoreboard players set hud item_hunt_config 1
+# hudwidth: characters available for the item part of the silent actionbar line.
+# Items that do not fit are moved to a rotation page (item_hunt:silent/measure).
+# 55 leaves room for the clock and the page indicator on a ~70 character line,
+# which is about what fits at 720p / GUI scale 3. Lower it if the line still
+# runs off the screen, raise it to fit more items per page.
+execute unless score hudwidth item_hunt_config matches -2147483648.. run scoreboard players set hudwidth item_hunt_config 55
+# hudspin: ticks each rotation page stays on screen (40 = 2s).
+execute unless score hudspin item_hunt_config matches -2147483648.. run scoreboard players set hudspin item_hunt_config 40
+# hudloops: how many complete passes through the page loop one crouch is worth.
+# The bar closes after that even if the player keeps holding shift, so the time
+# on screen is hudloops * pages * hudspin: with the defaults, 4s for a 1 page
+# list, 8s for 2 pages, 20s for 5 pages. Drop it to 1 to halve all of those and
+# show each page once instead of twice.
+execute unless score hudloops item_hunt_config matches -2147483648.. run scoreboard players set hudloops item_hunt_config 2
+# hudmin: floor in ticks for that window, 0 = no floor. Only bites on short
+# lists: set it to 120 to hold a single page for 6s and leave 2+ pages untouched.
+execute unless score hudmin item_hunt_config matches -2147483648.. run scoreboard players set hudmin item_hunt_config 0
+# Per-player "the bar is on screen" flag for the silent display, plus the shared
+# rotation cursor (#page / #pages / #spin). Not wiped on reload: the flag is
+# rewritten from the real crouch state every tick, and measure resets the cursor.
+scoreboard objectives add item_hunt_hud dummy
 
 # Inicializar storage para el reloj
 data modify storage item_hunt:clock time set value {}
