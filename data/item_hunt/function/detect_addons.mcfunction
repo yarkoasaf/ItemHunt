@@ -4,7 +4,7 @@
 # next reload.
 
 # Portals addon
-execute if score portals ITEM_HUNT_ADDONS matches 1 run tellraw @a [{"text":"[Item Hunt addon Portals detected]","color":"light_purple"}]
+execute if score portals ITEM_HUNT_ADDONS matches 1 run tellraw @a {"nbt":"addon_portals","storage":"item_hunt:lang","interpret":true}
 scoreboard players set portals_ok ITEM_HUNT_ADDONS 0
 execute if score portals ITEM_HUNT_ADDONS matches 1 run scoreboard players set portals_ok ITEM_HUNT_ADDONS 1
 scoreboard players set portals ITEM_HUNT_ADDONS 0

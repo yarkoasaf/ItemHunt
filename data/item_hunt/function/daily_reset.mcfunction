@@ -1,4 +1,4 @@
-tellraw @a [{"text":"[Item Hunt] ","color":"aqua"},{"text":"Reiniciando items del día...","color":"yellow"}]
+tellraw @a {"nbt":"reset_now","storage":"item_hunt:lang","interpret":true}
 playsound minecraft:block.note_block.pling player @a ~ ~ ~ 1 1.5
 #incia random con min y max
 #el rango depende de la dimension elegida (Overworld/Nether/End)

@@ -1,50 +1,50 @@
-function item_hunt:premios/.premio1
-function item_hunt:premios/.premio2
-function item_hunt:premios/.premio3
-function item_hunt:premios/.premio4
-function item_hunt:premios/.premio5
-function item_hunt:premios/.premio6
-function item_hunt:premios/.premio7
-function item_hunt:premios/.premio8
-function item_hunt:premios/.premio9
-function item_hunt:premios/.premio10
-function item_hunt:premios/.premio11
-function item_hunt:premios/.premio12
-function item_hunt:premios/.premio13
-function item_hunt:premios/.premio14
-function item_hunt:premios/.premio15
-function item_hunt:premios/.premio16
-function item_hunt:premios/.premio17
-function item_hunt:premios/.premio18
-function item_hunt:premios/.premio19
-function item_hunt:premios/.premio20
-function item_hunt:premios/.premio21
-function item_hunt:premios/.premio22
-function item_hunt:premios/.premio23
-function item_hunt:premios/.premio24
-function item_hunt:premios/.premio25
-function item_hunt:premios/.premio26
-function item_hunt:premios/.premio27
-function item_hunt:premios/.premio28
-function item_hunt:premios/.premio29
-function item_hunt:premios/.premio30
-function item_hunt:premios/.premio31
-function item_hunt:premios/.premio32
-function item_hunt:premios/.premio33
-function item_hunt:premios/.premio34
-function item_hunt:premios/.premio35
-function item_hunt:premios/.premio36
-function item_hunt:premios/.premio37
-function item_hunt:premios/.premio38
-function item_hunt:premios/.premio39
-function item_hunt:premios/.premio40
-function item_hunt:premios/.premio41
-function item_hunt:premios/.premio42
-function item_hunt:premios/.premio43
-function item_hunt:premios/.premio44
-function item_hunt:premios/.premio45
-function item_hunt:premios/.premio46
-function item_hunt:premios/.premio47
-function item_hunt:premios/.premio48
-function item_hunt:premios/.premio49
-function item_hunt:premios/.premio50
+function item_hunt:premios/.premio1 with storage item_hunt:lang
+function item_hunt:premios/.premio2 with storage item_hunt:lang
+function item_hunt:premios/.premio3 with storage item_hunt:lang
+function item_hunt:premios/.premio4 with storage item_hunt:lang
+function item_hunt:premios/.premio5 with storage item_hunt:lang
+function item_hunt:premios/.premio6 with storage item_hunt:lang
+function item_hunt:premios/.premio7 with storage item_hunt:lang
+function item_hunt:premios/.premio8 with storage item_hunt:lang
+function item_hunt:premios/.premio9 with storage item_hunt:lang
+function item_hunt:premios/.premio10 with storage item_hunt:lang
+function item_hunt:premios/.premio11 with storage item_hunt:lang
+function item_hunt:premios/.premio12 with storage item_hunt:lang
+function item_hunt:premios/.premio13 with storage item_hunt:lang
+function item_hunt:premios/.premio14 with storage item_hunt:lang
+function item_hunt:premios/.premio15 with storage item_hunt:lang
+function item_hunt:premios/.premio16 with storage item_hunt:lang
+function item_hunt:premios/.premio17 with storage item_hunt:lang
+function item_hunt:premios/.premio18 with storage item_hunt:lang
+function item_hunt:premios/.premio19 with storage item_hunt:lang
+function item_hunt:premios/.premio20 with storage item_hunt:lang
+function item_hunt:premios/.premio21 with storage item_hunt:lang
+function item_hunt:premios/.premio22 with storage item_hunt:lang
+function item_hunt:premios/.premio23 with storage item_hunt:lang
+function item_hunt:premios/.premio24 with storage item_hunt:lang
+function item_hunt:premios/.premio25 with storage item_hunt:lang
+function item_hunt:premios/.premio26 with storage item_hunt:lang
+function item_hunt:premios/.premio27 with storage item_hunt:lang
+function item_hunt:premios/.premio28 with storage item_hunt:lang
+function item_hunt:premios/.premio29 with storage item_hunt:lang
+function item_hunt:premios/.premio30 with storage item_hunt:lang
+function item_hunt:premios/.premio31 with storage item_hunt:lang
+function item_hunt:premios/.premio32 with storage item_hunt:lang
+function item_hunt:premios/.premio33 with storage item_hunt:lang
+function item_hunt:premios/.premio34 with storage item_hunt:lang
+function item_hunt:premios/.premio35 with storage item_hunt:lang
+function item_hunt:premios/.premio36 with storage item_hunt:lang
+function item_hunt:premios/.premio37 with storage item_hunt:lang
+function item_hunt:premios/.premio38 with storage item_hunt:lang
+function item_hunt:premios/.premio39 with storage item_hunt:lang
+function item_hunt:premios/.premio40 with storage item_hunt:lang
+function item_hunt:premios/.premio41 with storage item_hunt:lang
+function item_hunt:premios/.premio42 with storage item_hunt:lang
+function item_hunt:premios/.premio43 with storage item_hunt:lang
+function item_hunt:premios/.premio44 with storage item_hunt:lang
+function item_hunt:premios/.premio45 with storage item_hunt:lang
+function item_hunt:premios/.premio46 with storage item_hunt:lang
+function item_hunt:premios/.premio47 with storage item_hunt:lang
+function item_hunt:premios/.premio48 with storage item_hunt:lang
+function item_hunt:premios/.premio49 with storage item_hunt:lang
+function item_hunt:premios/.premio50 with storage item_hunt:lang

@@ -15,7 +15,7 @@
 execute store result score #won_now item_hunt_config if entity @a[tag=won_this_tick]
 
 # Tie: 2 or more at once. Fires in every mode, not just race.
-execute if score #won_now item_hunt_config matches 2.. run tellraw @a ["",{"text":"[Item Hunt] ","color":"aqua"},{"text":"¡Empate! ","color":"light_purple","bold":true},{"selector":"@a[tag=won_this_tick]","color":"gold"},{"text":" consiguieron los items en el mismo tick!","color":"light_purple"}]
+execute if score #won_now item_hunt_config matches 2.. run tellraw @a {"nbt":"tie","storage":"item_hunt:lang","interpret":true}
 execute if score #won_now item_hunt_config matches 2.. run playsound minecraft:block.note_block.chime master @a ~ ~ ~ 1 1.2
 
 # Race mode: the deferred round reset, now that everyone has been scored.

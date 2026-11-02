@@ -16,5 +16,12 @@ execute if score hud item_hunt_config matches 1 run scoreboard players set @a it
 # sure the pages exist before the first player crouches in silent mode.
 function item_hunt:silent/measure
 
+# Reload the active language, then repaint everything that holds text: the
+# sidebar header + objective title (lang/board) and the mode indicators
+# (board_flags). Without this the language button would only take effect on
+# the next daily reset.
+function item_hunt:lang/apply
+function item_hunt:lang/board
+
 # Update the sidebar mode indicators
 function item_hunt:board_flags

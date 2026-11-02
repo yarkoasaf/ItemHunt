@@ -7,6 +7,11 @@
 # The trick that makes this possible without string functions: "data get" on a
 # string path returns its LENGTH, so a name can be measured in characters.
 #
+# What the bar actually draws is slotN.tk, a "translate" component the client
+# resolves into its own language, and the server cannot know how long that
+# comes out. So the layout is estimated from slotN.name, the plain English
+# string, and #budget below carries the slack for a longer language.
+#
 # hudwidth (item_hunt_config) is the budget in characters for the item part of
 # the line; the rest of the actionbar holds the clock and the "(2/3)" page
 # indicator. Lower it if the line still overflows at your resolution / GUI
@@ -15,7 +20,8 @@
 #
 # Scratch (item_hunt_hud): #len = name + decoration, #try = what the page would
 # measure with the item added, #run = width already used by the page being
-# filled, #page_n = page being filled.
+# filled, #page_n = page being filled, #budget = hudwidth after the language
+# allowance, #c4 / #c5 = the constants that allowance is worked out with.
 # Results (item_hunt_hud): #pg1..#pg7 = page each slot belongs to, #pages = how
 # many pages today's list needs. One page means nothing rotates.
 
@@ -31,6 +37,18 @@ scoreboard players set #pg7 item_hunt_hud 0
 scoreboard players set #run item_hunt_hud 0
 scoreboard players set #page_n item_hunt_hud 1
 
+# The names are measured in English but drawn in the player's own language,
+# and Spanish item names run roughly a quarter longer than their English
+# originals. So while the pack is set to Spanish the budget is cut to 80% to
+# leave them the room; in English it is hudwidth exactly, as before. This is
+# an estimate either way -- hudwidth is still the knob to turn if the line
+# overflows or comes out sparser than you want.
+scoreboard players set #c4 item_hunt_hud 4
+scoreboard players set #c5 item_hunt_hud 5
+scoreboard players operation #budget item_hunt_hud = hudwidth item_hunt_config
+execute unless score lang item_hunt_config matches 1 run scoreboard players operation #budget item_hunt_hud *= #c4 item_hunt_hud
+execute unless score lang item_hunt_config matches 1 run scoreboard players operation #budget item_hunt_hud /= #c5 item_hunt_hud
+
 # --- slot 1 ---
 execute if score active item_hunt_config matches 1.. store result score #len item_hunt_hud run data get storage item_hunt:data slot1.name
 # the mark before the name and the separator after it
@@ -40,8 +58,8 @@ execute if score active item_hunt_config matches 1.. run scoreboard players oper
 # Over budget while the page already holds something -> open a new page. The
 # "#run matches 1.." guard is what lets a single over-long name sit alone on
 # its own page instead of opening an empty one before itself.
-execute if score active item_hunt_config matches 1.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
-execute if score active item_hunt_config matches 1.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
+execute if score active item_hunt_config matches 1.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
+execute if score active item_hunt_config matches 1.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
 execute if score active item_hunt_config matches 1.. run scoreboard players operation #pg1 item_hunt_hud = #page_n item_hunt_hud
 execute if score active item_hunt_config matches 1.. run scoreboard players operation #run item_hunt_hud += #len item_hunt_hud
 
@@ -50,8 +68,8 @@ execute if score active item_hunt_config matches 2.. store result score #len ite
 execute if score active item_hunt_config matches 2.. run scoreboard players add #len item_hunt_hud 5
 execute if score active item_hunt_config matches 2.. run scoreboard players operation #try item_hunt_hud = #run item_hunt_hud
 execute if score active item_hunt_config matches 2.. run scoreboard players operation #try item_hunt_hud += #len item_hunt_hud
-execute if score active item_hunt_config matches 2.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
-execute if score active item_hunt_config matches 2.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
+execute if score active item_hunt_config matches 2.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
+execute if score active item_hunt_config matches 2.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
 execute if score active item_hunt_config matches 2.. run scoreboard players operation #pg2 item_hunt_hud = #page_n item_hunt_hud
 execute if score active item_hunt_config matches 2.. run scoreboard players operation #run item_hunt_hud += #len item_hunt_hud
 
@@ -60,8 +78,8 @@ execute if score active item_hunt_config matches 3.. store result score #len ite
 execute if score active item_hunt_config matches 3.. run scoreboard players add #len item_hunt_hud 5
 execute if score active item_hunt_config matches 3.. run scoreboard players operation #try item_hunt_hud = #run item_hunt_hud
 execute if score active item_hunt_config matches 3.. run scoreboard players operation #try item_hunt_hud += #len item_hunt_hud
-execute if score active item_hunt_config matches 3.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
-execute if score active item_hunt_config matches 3.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
+execute if score active item_hunt_config matches 3.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
+execute if score active item_hunt_config matches 3.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
 execute if score active item_hunt_config matches 3.. run scoreboard players operation #pg3 item_hunt_hud = #page_n item_hunt_hud
 execute if score active item_hunt_config matches 3.. run scoreboard players operation #run item_hunt_hud += #len item_hunt_hud
 
@@ -70,8 +88,8 @@ execute if score active item_hunt_config matches 4.. store result score #len ite
 execute if score active item_hunt_config matches 4.. run scoreboard players add #len item_hunt_hud 5
 execute if score active item_hunt_config matches 4.. run scoreboard players operation #try item_hunt_hud = #run item_hunt_hud
 execute if score active item_hunt_config matches 4.. run scoreboard players operation #try item_hunt_hud += #len item_hunt_hud
-execute if score active item_hunt_config matches 4.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
-execute if score active item_hunt_config matches 4.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
+execute if score active item_hunt_config matches 4.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
+execute if score active item_hunt_config matches 4.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
 execute if score active item_hunt_config matches 4.. run scoreboard players operation #pg4 item_hunt_hud = #page_n item_hunt_hud
 execute if score active item_hunt_config matches 4.. run scoreboard players operation #run item_hunt_hud += #len item_hunt_hud
 
@@ -80,8 +98,8 @@ execute if score active item_hunt_config matches 5.. store result score #len ite
 execute if score active item_hunt_config matches 5.. run scoreboard players add #len item_hunt_hud 5
 execute if score active item_hunt_config matches 5.. run scoreboard players operation #try item_hunt_hud = #run item_hunt_hud
 execute if score active item_hunt_config matches 5.. run scoreboard players operation #try item_hunt_hud += #len item_hunt_hud
-execute if score active item_hunt_config matches 5.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
-execute if score active item_hunt_config matches 5.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
+execute if score active item_hunt_config matches 5.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
+execute if score active item_hunt_config matches 5.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
 execute if score active item_hunt_config matches 5.. run scoreboard players operation #pg5 item_hunt_hud = #page_n item_hunt_hud
 execute if score active item_hunt_config matches 5.. run scoreboard players operation #run item_hunt_hud += #len item_hunt_hud
 
@@ -90,8 +108,8 @@ execute if score active item_hunt_config matches 6.. store result score #len ite
 execute if score active item_hunt_config matches 6.. run scoreboard players add #len item_hunt_hud 5
 execute if score active item_hunt_config matches 6.. run scoreboard players operation #try item_hunt_hud = #run item_hunt_hud
 execute if score active item_hunt_config matches 6.. run scoreboard players operation #try item_hunt_hud += #len item_hunt_hud
-execute if score active item_hunt_config matches 6.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
-execute if score active item_hunt_config matches 6.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
+execute if score active item_hunt_config matches 6.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
+execute if score active item_hunt_config matches 6.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
 execute if score active item_hunt_config matches 6.. run scoreboard players operation #pg6 item_hunt_hud = #page_n item_hunt_hud
 execute if score active item_hunt_config matches 6.. run scoreboard players operation #run item_hunt_hud += #len item_hunt_hud
 
@@ -100,8 +118,8 @@ execute if score active item_hunt_config matches 7.. store result score #len ite
 execute if score active item_hunt_config matches 7.. run scoreboard players add #len item_hunt_hud 5
 execute if score active item_hunt_config matches 7.. run scoreboard players operation #try item_hunt_hud = #run item_hunt_hud
 execute if score active item_hunt_config matches 7.. run scoreboard players operation #try item_hunt_hud += #len item_hunt_hud
-execute if score active item_hunt_config matches 7.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
-execute if score active item_hunt_config matches 7.. if score #try item_hunt_hud > hudwidth item_hunt_config if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
+execute if score active item_hunt_config matches 7.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players add #page_n item_hunt_hud 1
+execute if score active item_hunt_config matches 7.. if score #try item_hunt_hud > #budget item_hunt_hud if score #run item_hunt_hud matches 1.. run scoreboard players set #run item_hunt_hud 0
 execute if score active item_hunt_config matches 7.. run scoreboard players operation #pg7 item_hunt_hud = #page_n item_hunt_hud
 execute if score active item_hunt_config matches 7.. run scoreboard players operation #run item_hunt_hud += #len item_hunt_hud
 

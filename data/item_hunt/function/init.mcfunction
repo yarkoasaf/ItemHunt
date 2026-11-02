@@ -89,10 +89,23 @@ execute unless score hudloops item_hunt_config matches -2147483648.. run scorebo
 # hudmin: floor in ticks for that window, 0 = no floor. Only bites on short
 # lists: set it to 120 to hold a single page for 6s and leave 2+ pages untouched.
 execute unless score hudmin item_hunt_config matches -2147483648.. run scoreboard players set hudmin item_hunt_config 0
+# lang: interface language. 0 = Español (default, what the pack shipped with),
+# 1 = English. Selects which of item_hunt:lang/{es,en} fills storage
+# item_hunt:lang -- see lang/apply.
+execute unless score lang item_hunt_config matches -2147483648.. run scoreboard players set lang item_hunt_config 0
+# langset: 1 once a language has been chosen explicitly. While it is 0, load
+# keeps offering the choice (item_hunt:config/lang_prompt), because the #load
+# tag fires before any player is in the world and the first broadcast of it
+# reaches nobody.
+execute unless score langset item_hunt_config matches -2147483648.. run scoreboard players set langset item_hunt_config 0
 # Per-player "the bar is on screen" flag for the silent display, plus the shared
 # rotation cursor (#page / #pages / #spin). Not wiped on reload: the flag is
 # rewritten from the real crouch state every tick, and measure resets the cursor.
 scoreboard objectives add item_hunt_hud dummy
+
+# Fill storage item_hunt:lang with the active language. Must happen BEFORE
+# item_hunt:display below, which draws the sidebar labels from it.
+function item_hunt:lang/apply
 
 # Inicializar storage para el reloj
 data modify storage item_hunt:clock time set value {}

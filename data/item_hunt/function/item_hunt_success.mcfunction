@@ -7,9 +7,9 @@ scoreboard players operation reward item_hunt_config = active item_hunt_config
 #scoreboard players remove reward item_hunt_config 1
 
 #message to all players that @s was the first to find all items
-execute if score @s item_hunt_daily_success matches 1 run tellraw @a ["",{"text":"[Item Hunt] ","color":"aqua"},{"text":"¡","color":"gold"},{"selector":"@s","color":"gold"},{"text":" Ha encontrado los ","color":"gold"},{"score":{"name":"active","objective":"item_hunt_config"},"color":"yellow","bold":true},{"text":" items antes que todos!","color":"gold"},{"text":" (+","color":"green"},{"score":{"name":"reward","objective":"item_hunt_config"},"color":"green","bold":true},{"text":" puntos)","color":"green"}]
+execute if score @s item_hunt_daily_success matches 1 run tellraw @a {"nbt":"win_first","storage":"item_hunt:lang","interpret":true}
 #message to all players that @s has found all items
-execute if score @s item_hunt_daily_success matches 2.. run tellraw @a ["",{"text":"[Item Hunt] ","color":"aqua"},{"text":"¡","color":"gold"},{"selector":"@s","color":"gold"},{"text":" Ha encontrado los ","color":"gold"},{"score":{"name":"active","objective":"item_hunt_config"},"color":"yellow","bold":true},{"text":" items del día!","color":"gold"},{"text":" (+","color":"green"},{"score":{"name":"reward","objective":"item_hunt_config"},"color":"green","bold":true},{"text":" puntos)","color":"green"}]
+execute if score @s item_hunt_daily_success matches 2.. run tellraw @a {"nbt":"win","storage":"item_hunt:lang","interpret":true}
 
 execute as @a run playsound minecraft:entity.player.levelup master @s ^ ^ ^ 1 0.6
 execute as @s run playsound minecraft:entity.cat.ambient master @s ^ ^ ^ 1 1.7
