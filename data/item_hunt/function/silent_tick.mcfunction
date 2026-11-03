@@ -54,6 +54,16 @@ data modify storage item_hunt:hud ctx.hora set from storage item_hunt:clock time
 data modify storage item_hunt:hud ctx.pad set from storage item_hunt:clock time.pad
 data modify storage item_hunt:hud ctx.minuto set from storage item_hunt:clock time.curr_minuto
 
+# Mode icons, drawn to the right of the clock: a bolt for race mode, a spiral
+# while the portals addon is in play, both at once when both apply. Same reason
+# as the clock above for living here -- they are the same for everyone, so the
+# run is assembled once per tick instead of once per player. The empty value
+# first is not optional: silent/show takes ctx.flags as a macro argument, so the
+# key has to exist even on a day with no mode active.
+data modify storage item_hunt:hud ctx.flags set value ""
+execute if score race item_hunt_config matches 1 run function item_hunt:silent/append_race with storage item_hunt:hud ctx
+execute if score portals_ok ITEM_HUNT_ADDONS matches 1 run function item_hunt:silent/append_portal with storage item_hunt:hud ctx
+
 # Draw for everyone with an open window. Re-sending every tick is what keeps the
 # bar solid instead of fading, and it also makes an item turn green the moment
 # it is picked up.

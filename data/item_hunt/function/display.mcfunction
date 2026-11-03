@@ -17,6 +17,14 @@ scoreboard objectives modify item_hunt_board numberformat blank
 # again here because the objective was just removed and re-added above.
 function item_hunt:lang/board
 
+# Making the two header lines APPEAR is this file's job: lang/board only gives
+# them their text, and a sidebar entry with no score is not drawn at all.
+# Layout, highest score first: 102 portals addon / 101 race / 100 consume
+# (board_flags) - 99 "Resets in:" - 98 the HH:MM clock (update_time_display)
+# - 97 "Find items:" - 96..90 the seven item lines (resolve_items).
+scoreboard players set ih_line_timer item_hunt_board 99
+scoreboard players set ih_line_find item_hunt_board 97
+
 
 # Show the board on the sidebar -- only in global mode. Silent mode keeps it
 # hidden and shows the same information on the actionbar instead, but the board
