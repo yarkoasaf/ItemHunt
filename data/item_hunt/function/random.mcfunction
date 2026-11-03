@@ -20,7 +20,7 @@ $execute store result score item item_hunt_item7 run random value $(min)..$(max)
 # this function again. The first line that detects a collision recurses, and
 # that inner call returns with a fully clean set, so the remaining checks below
 # find nothing and no further rolls happen.
-# The pool is at least 1058 items (Overworld only), so 7 draws collide roughly
+# The pool is at least 1046 items (Overworld only), so 7 draws collide roughly
 # 2% of the time -> in practice this is one extra pass at most, and it can
 # never loop forever as long as max-min+1 >= 7.
 execute if score item item_hunt_item2 = item item_hunt_item1 run function item_hunt:random with storage item_hunt:cfg args

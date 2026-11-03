@@ -19,7 +19,7 @@
 # Deliberately NOT here, because it is identical in both languages:
 #   [ON]/[OFF], [Global]/[Silent], [Overworld]/[Nether]/[End], [Español]/
 #   [English], the tick preset hovers ("72000 ticks (1h)"), the HH:MM clock
-#   and the 1228 item names (see setup_items).
+#   and the 1218 item names (see setup_items).
 
 
 # --- Load and notices ---

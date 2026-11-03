@@ -17,7 +17,7 @@
 # Lo que NO esta aca a proposito, porque es igual en los dos idiomas:
 #   [ON]/[OFF], [Global]/[Silent], [Overworld]/[Nether]/[End], [Español]/
 #   [English], los hover de los presets de ticks ("72000 ticks (1h)"), el
-#   reloj HH:MM y los nombres de los 1228 items (ver setup_items).
+#   reloj HH:MM y los nombres de los 1218 items (ver setup_items).
 
 
 # --- Carga y avisos ---

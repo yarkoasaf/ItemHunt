@@ -4,7 +4,7 @@
 # the cumulative max index of each tier in ow_max / nether_max / end_max.
 # Result is written to storage item_hunt:cfg args, then passed to random.
 
-data modify storage item_hunt:cfg args set value {min:1,max:1058}
+data modify storage item_hunt:cfg args set value {min:1,max:1046}
 execute if score dimension item_hunt_config matches 1 store result storage item_hunt:cfg args.max int 1 run scoreboard players get ow_max item_hunt_config
 execute if score dimension item_hunt_config matches 2 store result storage item_hunt:cfg args.max int 1 run scoreboard players get nether_max item_hunt_config
 execute if score dimension item_hunt_config matches 3 store result storage item_hunt:cfg args.max int 1 run scoreboard players get end_max item_hunt_config
